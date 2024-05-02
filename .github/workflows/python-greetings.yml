@@ -42,11 +42,6 @@ jobs:
       run: |
         echo "Stopping existing service in Staging Environment.."
         cmd /c "pm2 delete greetings-app-dev & set "errorlevel=0""
-        
-    - name: Modify Flask App Port
-      run: |
-        pm2 start app.py --name greetings-app-staging -- --port 7001
-      working-directory: python-greetings
 
     - name: Deploy to Development Environment
       run: |
