@@ -40,7 +40,7 @@ jobs:
         
     - name: Modify Flask App Port
       run: |
-        (Get-Content python-greetings/app.py) | ForEach-Object { $_ -replace 'port="3000"', 'port="7001"' } | Set-Content python-greetings/app.py
+        (Get-Content app.py) | ForEach-Object { $_ -replace 'port="3000"', 'port="7001"' } | Set-Content app.py
       working-directory: python-greetings
 
     - name: Deploy to Development Environment
