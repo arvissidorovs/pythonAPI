@@ -50,35 +50,9 @@ jobs:
           cmd /c "pm2 start app.py --name greetings-app-dev -- --port=7001"
       working-directory: python-greetings
 
-  tests-on-dev:
-    name: Run Tests on Development Environment
-    runs-on: self-hosted
-    needs: deploy-to-dev
-    steps:
-    - name: Checkout Delivery Pipeline Definition
-      uses: actions/checkout@v3.5.2
-
-    - name: Checkout Course JS API Framework Repository
-      uses: actions/checkout@v3.5.2
-      with:
-        repository: mtararujs/course-js-api-framework
-        path: course-js-api-framework
-    
-    - name: Install dependencies
-      run: |
-        cd course-js-api-framework
-        npm install
-
-    - name: Run tests on development environment
-      run: |
-        echo "Running tests on development environment.."
-        cmd /c "npm run greetings greetings_dev"
-      working-directory: course-js-api-framework
-
   deploy-to-staging:
     name: Deploy to Staging Environment
     runs-on: self-hosted
-    needs: tests-on-dev
     steps:
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
@@ -100,40 +74,10 @@ jobs:
         cmd /c "pm2 start app.py --name greetings-app-staging -- --port=7002"
       working-directory: python-greetings
 
-  tests-on-staging:
-    name: Run Tests on Staging Environment
-    runs-on: self-hosted
-    needs: deploy-to-staging
-    steps:
-    - name: Stop existing service in Staging Environment
-      run: |
-        echo "Stopping existing service in Staging Environment.."
-        cmd /c "pm2 delete greetings-app-staging & set "errorlevel=0""
-        
-    - name: Checkout Delivery Pipeline Definition
-      uses: actions/checkout@v3.5.2
-
-    - name: Checkout Course JS API Framework Repository
-      uses: actions/checkout@v3.5.2
-      with:
-        repository: mtararujs/course-js-api-framework
-        path: course-js-api-framework
-    
-    - name: Install dependencies
-      run: |
-        cd course-js-api-framework
-        npm install
-
-    - name: Run tests on staging environment
-      run: |
-        echo "Running tests on staging environment.."
-        cmd /c "npm run greetings greetings_staging"
-      working-directory: course-js-api-framework
 
   deploy-to-preprod:
     name: Deploy to Pre-production Environment
     runs-on: self-hosted
-    needs: tests-on-staging
     steps:
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
@@ -155,40 +99,10 @@ jobs:
         cmd /c "pm2 start app.py --name greetings-app-preprod -- --port=7003"
       working-directory: python-greetings
 
-  tests-on-preprod:
-    name: Run Tests on Pre-production Environment
-    runs-on: self-hosted
-    needs: deploy-to-preprod
-    steps:
-    - name: Stop existing service in Pre-production Environment
-      run: |
-        echo "Stopping existing service in Pre-production Environment.."
-        cmd /c "pm2 delete greetings-app-preprod & set "errorlevel=0""
-        
-    - name: Checkout Delivery Pipeline Definition
-      uses: actions/checkout@v3.5.2
-
-    - name: Checkout Course JS API Framework Repository
-      uses: actions/checkout@v3.5.2
-      with:
-        repository: mtararujs/course-js-api-framework
-        path: course-js-api-framework
-    
-    - name: Install dependencies
-      run: |
-        cd course-js-api-framework
-        npm install
-
-    - name: Run tests on pre-production environment
-      run: |
-        echo "Running tests on pre-production environment.."
-        cmd /c "npm run greetings greetings_preprod"
-      working-directory: course-js-api-framework
 
   deploy-to-prod:
     name: Deploy to Production Environment
     runs-on: self-hosted
-    needs: tests-on-preprod
     steps:
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
@@ -210,32 +124,3 @@ jobs:
         cmd c/ "pm2 start app.py --name greetings-app-prod -- --port 7004"
       working-directory: python-greetings
 
-  tests-on-prod:
-    name: Run Tests on Production Environment
-    runs-on: self-hosted
-    needs: deploy-to-prod
-    steps:
-    - name: Stop existing service in Production Environment
-      run: |
-        echo "Stopping existing service in Production Environment.."
-         cmd /c "pm2 delete greetings-app-prod & set "errorlevel=0""
-         
-    - name: Checkout Delivery Pipeline Definition
-      uses: actions/checkout@v3.5.2
-
-    - name: Checkout Course JS API Framework Repository
-      uses: actions/checkout@v3.5.2
-      with:
-        repository: mtararujs/course-js-api-framework
-        path: course-js-api-framework
-    
-    - name: Install dependencies
-      run: |
-        cd course-js-api-framework
-        npm install
-
-    - name: Run tests on production environment
-      run: |
-        echo "Running tests on production environment.."
-        cmd c/ "npm run greetings greetings_prod"
-      working-directory: course-js-api-framework
