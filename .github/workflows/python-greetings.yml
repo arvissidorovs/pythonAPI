@@ -18,6 +18,7 @@ jobs:
         with:
           repository: mtararujs/python-greetings
           path: python-greetings
+          ref: 4e911440a9886c7c26ccbb4eb55f0bc2a5067b51
       
       - name: Install pip dependencies
         run: |
@@ -37,16 +38,18 @@ jobs:
       with:
         repository: mtararujs/python-greetings
         path: python-greetings
+        ref: 4e911440a9886c7c26ccbb4eb55f0bc2a5067b51
         
     - name: Stop existing service in Staging Environment
       run: |
         echo "Stopping existing service in Staging Environment.."
-        cmd /c "pm2 delete greetings-app-dev & set "errorlevel=0""
+        cmd /c "pm2 delete greetings-app-dev & set \"errorlevel=0\""
 
     - name: Deploy to Development Environment
+      shell: bash
       run: |
           echo "Deploying to Development Environment.."
-          cmd /c "pm2 start app.py --name greetings-app-dev --interpreter python3 -- --port=7001"
+          cmd /c "pm2 start app.py --name greetings-app-dev -- --port=7001"
       working-directory: python-greetings
 
   tests-on-dev:
