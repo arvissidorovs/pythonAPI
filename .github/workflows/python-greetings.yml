@@ -31,12 +31,6 @@ jobs:
     steps:
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
-
-    - name: Checkout Python Greetings Repository
-      uses: actions/checkout@v3.5.2
-      with:
-        repository: mtararujs/python-greetings
-        path: python-greetings
         
     - name: Stop existing service in Staging Environment
       run: |
