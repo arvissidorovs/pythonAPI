@@ -46,7 +46,6 @@ jobs:
         cmd /c "pm2 delete greetings-app-dev & set \"errorlevel=0\""
 
     - name: Deploy to Development Environment
-      shell: bash
       run: |
           echo "Deploying to Development Environment.."
           cmd /c "pm2 start app.py --name greetings-app-dev -- --port=7001"
