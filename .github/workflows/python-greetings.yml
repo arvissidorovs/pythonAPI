@@ -147,7 +147,7 @@ jobs:
     - name: Run tests on staging environment
       run: |
         echo "Running tests on staging environment.."
-        cmd /c "npm run greetings greetings_stg"
+        cmd /c "npm run greetings greetings_staging"
       working-directory: course-js-api-framework
 
   deploy-to-preprod:
@@ -193,6 +193,18 @@ jobs:
       with:
         repository: mtararujs/course-js-api-framework
         path: course-js-api-framework
+
+    - name: Checkout Python Greetings Repository
+      uses: actions/checkout@v3.5.2
+      with:
+        repository: mtararujs/python-greetings
+        path: python-greetings
+
+    - name: Deploy to Pre-production Environment
+      run: |
+        echo "Deploying to Pre-production Environment.."
+        cmd /c "pm2 start app.py --name greetings-app-preprod -- --port=7003"
+      working-directory: python-greetings
     
     - name: Install dependencies
       run: |
@@ -248,6 +260,18 @@ jobs:
       with:
         repository: mtararujs/course-js-api-framework
         path: course-js-api-framework
+
+    - name: Checkout Python Greetings Repository
+      uses: actions/checkout@v3.5.2
+      with:
+        repository: mtararujs/python-greetings
+        path: python-greetings
+
+    - name: Deploy to Production Environment
+      run: |
+        echo "Deploying to Production Environment.."
+        cmd c/ "pm2 start app.py --name greetings-app-prod -- --port 7004"
+      working-directory: python-greetings
     
     - name: Install dependencies
       run: |
