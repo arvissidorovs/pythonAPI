@@ -10,8 +10,19 @@ jobs:
     name: Install Python Dependencies
     runs-on: self-hosted
     steps:
-      - name: content
-        uses: ./.github/actions/depoly.yml
+      - name: Checkout
+        uses: actions/checkout@v3.5.2
+
+      - name: Checkout
+        uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/python-greetings
+          path: python-greetings
+      
+      - name: Install pip dependencies
+        run: |
+          cd python-greetings
+          pip3 install -r requirements.txt
 
   deploy-to-dev:
     name: Deploy to Development Environment
@@ -52,6 +63,12 @@ jobs:
       with:
         repository: mtararujs/course-js-api-framework
         path: course-js-api-framework
+
+    - name: Deploy to Development Environment
+      run: |
+          echo "Deploying to Development Environment.."
+          cmd /c "pm2 start app.py --name greetings-app-dev -- --port=7001"
+      working-directory: python-greetings
     
     - name: Install dependencies
       run: |
