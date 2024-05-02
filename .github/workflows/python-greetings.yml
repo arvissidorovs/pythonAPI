@@ -32,10 +32,28 @@ jobs:
       - name: Install pm2
         run: npm install -g pm2
 
+  run-tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Delivery Pipeline Definition
+        uses: actions/checkout@v3.5.2
+
+      - name: Checkout Course JS API Framework Repository
+        uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/course-js-api-framework
+          path: course-js-api-framework
+    
+      - name: Install dependencies
+        run: |
+          cd course-js-api-framework
+          npm install
+
   deploy-to-dev:
     name: Deploy to Development Environment
     runs-on: ubuntu-latest
-    needs: [install-pip-deps, tests-on-dev]
+    needs: [install-pip-deps, run-tests]
     steps:
       - name: Stop existing service in Development Environment
         run: |
