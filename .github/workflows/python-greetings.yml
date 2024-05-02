@@ -41,7 +41,7 @@ jobs:
     - name: Stop existing service in Development Environment
       run: |
         echo "Stopping existing service in Development Environment.."
-         pm2 delete python-greetings/greetings-app-dev ; set "errorlevel=0"
+         pm2 delete greetings-app-dev ; set "errorlevel=0"
 
     - name: Deploy to Development Environment
       run: |
