@@ -24,6 +24,12 @@ jobs:
           cd python-greetings
           pip3 install -r requirements.txt
 
+      - name: Persist python-greetings directory
+        uses: actions/cache@v2
+        with:
+          path: python-greetings
+          key: python-greetings-${{ runner.os }}
+
   deploy-to-dev:
     name: Deploy to Development Environment
     runs-on: self-hosted
