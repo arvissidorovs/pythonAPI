@@ -38,6 +38,12 @@ jobs:
         repository: mtararujs/python-greetings
         path: python-greetings
         
+    - name: Stop existing service in Staging Environment
+      run: |
+        echo "Stopping existing service in Staging Environment.."
+        pm2 delete greetings-app-staging || true
+        exit /b 0
+        
     - name: Modify Flask App Port
       run: |
         (Get-Content app.py) | ForEach-Object { $_ -replace 'port="3000"', 'port="7001"' } | Set-Content app.py
