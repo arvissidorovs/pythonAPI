@@ -18,7 +18,6 @@ jobs:
         with:
           repository: mtararujs/python-greetings
           path: python-greetings
-          ref: 4e911440a9886c7c26ccbb4eb55f0bc2a5067b51
       
       - name: Install pip dependencies
         run: |
@@ -48,7 +47,7 @@ jobs:
     - name: Deploy to Development Environment
       run: |
           echo "Deploying to Development Environment.."
-          (Get-Content app.py) | ForEach-Object { $_ -replace 'port="3000"', 'port="7001"' } | Set-Content app.py
+          cmd /c "pm2 start app.py --name greetings-app-dev -- --port=7001"
       working-directory: python-greetings
 
   tests-on-dev:
@@ -62,7 +61,7 @@ jobs:
     - name: Checkout Course JS API Framework Repository
       uses: actions/checkout@v3.5.2
       with:
-        repository: U1-nix/course-js-api-framework
+        repository: mtararujs/course-js-api-framework
         path: course-js-api-framework
     
     - name: Install dependencies
