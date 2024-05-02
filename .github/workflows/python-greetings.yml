@@ -10,10 +10,10 @@ jobs:
     name: Install Python Dependencies
     runs-on: self-hosted
     steps:
-      - name: Checkout Delivery Pipeline Definition
+      - name: Checkout
         uses: actions/checkout@v3.5.2
 
-      - name: Checkout Python Greetings Repository
+      - name: Checkout
         uses: actions/checkout@v3.5.2
         with:
           repository: mtararujs/python-greetings
@@ -29,10 +29,10 @@ jobs:
     runs-on: self-hosted
     needs: install-pip-deps
     steps:
-    - name: Checkout Delivery Pipeline Definition
+    - name: Checkout
       uses: actions/checkout@v3.5.2
 
-    - name: Checkout Python Greetings Repository
+    - name: Checkout
       uses: actions/checkout@v3.5.2
       with:
         repository: mtararujs/python-greetings
