@@ -38,10 +38,7 @@ jobs:
         repository: mtararujs/python-greetings
         path: python-greetings
       
-    - name: Stop existing service in Development Environment
-      run: |
-        echo "Stopping existing service in Development Environment.."
-         pm2 delete greetings-app-dev ; set "errorlevel=0"
+    
 
     - name: Deploy to Development Environment
       run: |
