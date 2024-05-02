@@ -24,11 +24,27 @@ jobs:
           cd python-greetings
           pip3 install -r requirements.txt
 
-  
+  deploy-to-dev:
+    name: Deploy to Development Environment
+    runs-on: self-hosted
+    needs: install-pip-deps
+    steps:
+      - name: Stop existing service in Development Environment
+        run: |
+          echo "Stopping existing service in Development Environment.."
+          pm2 delete greetings-app-dev || true
+          exit /b 0
+
+      - name: Deploy to Development Environment
+        run: |
+          echo "Deploying to Development Environment.."
+          pm2 start app.py --name greetings-app-dev -- --port 7001
+        working-directory: python-greetings
 
   tests-on-dev:
     name: Run Tests on Development Environment
     runs-on: self-hosted
+    needs: deploy-to-dev
     steps:
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
