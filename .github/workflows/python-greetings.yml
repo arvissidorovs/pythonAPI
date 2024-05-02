@@ -39,7 +39,6 @@ jobs:
         path: python-greetings
         
     - name: Stop existing service in Staging Environment
-      shell: bash
       run: |
         echo "Stopping existing service in Staging Environment.."
         cmd /c "pm2 delete greetings-app-dev & set "errorlevel=0""
