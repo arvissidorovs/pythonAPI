@@ -39,10 +39,10 @@ jobs:
         path: python-greetings
         
     - name: Stop existing service in Staging Environment
-      shell: cmd
+      shell: bash
       run: |
         echo "Stopping existing service in Staging Environment.."
-        "pm2 delete greetings-app-<vides_nosaukums> & set "errorlevel=0""
+        cmd /c "pm2 delete greetings-app-dev & set "errorlevel=0""
         
     - name: Modify Flask App Port
       run: |
