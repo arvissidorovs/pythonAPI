@@ -62,7 +62,7 @@ jobs:
     - name: Checkout Course JS API Framework Repository
       uses: actions/checkout@v3.5.2
       with:
-        repository: mtararujs/course-js-api-framework
+        repository: U1-nix/course-js-api-framework
         path: course-js-api-framework
     
     - name: Install dependencies
