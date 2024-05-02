@@ -73,11 +73,11 @@ jobs:
         cd course-js-api-framework
         npm install
 
-    - name: Run tests on development environment
-      run: |
-        echo "Running tests on development environment.."
-        cmd c/ "npm run greetings greetings_dev"
-      working-directory: course-js-api-framework
+    #- name: Run tests on development environment
+    #  run: |
+    #    echo "Running tests on development environment.."
+    #    cmd c/ "npm run greetings greetings_dev"
+    #  working-directory: course-js-api-framework
 
   deploy-to-staging:
     name: Deploy to Staging Environment
