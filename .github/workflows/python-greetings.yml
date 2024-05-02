@@ -8,7 +8,7 @@ on:
 jobs:
   install-pip-deps:
     name: Install Python Dependencies
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout Delivery Pipeline Definition
         uses: actions/checkout@v3.5.2
