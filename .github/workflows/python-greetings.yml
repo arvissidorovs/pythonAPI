@@ -39,6 +39,7 @@ jobs:
         path: python-greetings
       
     - name: Stop existing service in Development Environment
+      shell: bash
       run: |
         echo "Stopping existing service in Development Environment.."
         pm2 delete greetings-app-dev || true
