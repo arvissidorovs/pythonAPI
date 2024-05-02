@@ -27,7 +27,6 @@ jobs:
   deploy-to-dev:
     name: Deploy to Development Environment
     runs-on: self-hosted
-    needs: install-pip-deps
     steps:
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
@@ -52,7 +51,6 @@ jobs:
   tests-on-dev:
     name: Run Tests on Development Environment
     runs-on: self-hosted
-    needs: deploy-to-dev
     steps:
     - name: Stop existing service in Staging Environment
       run: |
@@ -82,7 +80,6 @@ jobs:
   deploy-to-staging:
     name: Deploy to Staging Environment
     runs-on: self-hosted
-    needs: tests-on-dev
     steps:
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
@@ -107,7 +104,6 @@ jobs:
   tests-on-staging:
     name: Run Tests on Staging Environment
     runs-on: self-hosted
-    needs: deploy-to-staging
     steps:
     - name: Stop existing service in Staging Environment
       run: |
@@ -128,12 +124,15 @@ jobs:
         cd course-js-api-framework
         npm install
 
-    
+    - name: Run tests on development environment
+      run: |
+        echo "Running tests on development environment.."
+        cmd c/ "npm run greetings greetings_dev"
+      working-directory: course-js-api-framework
 
   deploy-to-preprod:
     name: Deploy to Pre-production Environment
     runs-on: self-hosted
-    needs: tests-on-staging
     steps:
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
@@ -158,7 +157,6 @@ jobs:
   tests-on-preprod:
     name: Run Tests on Pre-production Environment
     runs-on: self-hosted
-    needs: deploy-to-preprod
     steps:
     - name: Stop existing service in Pre-production Environment
       run: |
@@ -188,7 +186,6 @@ jobs:
   deploy-to-prod:
     name: Deploy to Production Environment
     runs-on: self-hosted
-    needs: tests-on-preprod
     steps:
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
@@ -213,7 +210,6 @@ jobs:
   tests-on-prod:
     name: Run Tests on Production Environment
     runs-on: self-hosted
-    needs: deploy-to-prod
     steps:
     - name: Stop existing service in Production Environment
       run: |
