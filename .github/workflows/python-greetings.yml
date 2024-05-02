@@ -41,7 +41,7 @@ jobs:
     - name: Stop existing service in Staging Environment
       run: |
         echo "Stopping existing service in Staging Environment.."
-        shell: cmd "pm2 delete greetings-app-staging || true exit /b 0"
+        cmd /c "pm2 delete greetings-app-staging || true exit /b 0"
         
     - name: Modify Flask App Port
       run: |
