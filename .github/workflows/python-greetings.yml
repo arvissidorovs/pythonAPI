@@ -8,7 +8,7 @@ on:
 jobs:
   install-pip-deps:
     name: Install Python Dependencies
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
 
   deploy-to-dev:
     name: Deploy to Development Environment
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: install-pip-deps
     steps:
       - name: Checkout Repository
@@ -31,7 +31,7 @@ jobs:
 
   tests-on-dev:
     name: Run Tests on Development Environment
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: deploy-to-dev
     steps:
       - name: Checkout Repository
@@ -43,7 +43,7 @@ jobs:
 
   deploy-to-staging:
     name: Deploy to Staging Environment
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: tests-on-dev
     steps:
       - name: Checkout Repository
@@ -55,7 +55,7 @@ jobs:
 
   tests-on-staging:
     name: Run Tests on Staging Environment
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: deploy-to-staging
     steps:
       - name: Checkout Repository
@@ -67,7 +67,7 @@ jobs:
 
   deploy-to-preprod:
     name: Deploy to Pre-production Environment
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: tests-on-staging
     steps:
       - name: Checkout Repository
@@ -79,7 +79,7 @@ jobs:
 
   tests-on-preprod:
     name: Run Tests on Pre-production Environment
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: deploy-to-preprod
     steps:
       - name: Checkout Repository
@@ -91,7 +91,7 @@ jobs:
 
   deploy-to-prod:
     name: Deploy to Production Environment
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: tests-on-preprod
     steps:
       - name: Checkout Repository
@@ -103,7 +103,7 @@ jobs:
 
   tests-on-prod:
     name: Run Tests on Production Environment
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: deploy-to-prod
     steps:
       - name: Checkout Repository
