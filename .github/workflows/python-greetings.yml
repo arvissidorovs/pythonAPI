@@ -57,7 +57,7 @@ jobs:
 
   deploy-to-dev:
     name: Deploy to Development Environment
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     needs: [install-pip-deps, run-tests]
     steps:
       - name: Stop existing service in Development Environment
@@ -75,7 +75,7 @@ jobs:
 
   tests-on-dev:
     name: Run Tests on Development Environment
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     needs: deploy-to-dev
     steps:
       - name: Run tests on development environment
@@ -86,7 +86,7 @@ jobs:
 
   deploy-to-staging:
     name: Deploy to Staging Environment
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     needs: [deploy-to-dev, tests-on-dev]
     steps:
       - name: Stop existing service in Staging Environment
@@ -104,7 +104,7 @@ jobs:
 
   tests-on-staging:
     name: Run Tests on Staging Environment
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     needs: deploy-to-staging
     steps:
       - name: Run tests on staging environment
@@ -115,7 +115,7 @@ jobs:
 
   deploy-to-preprod:
     name: Deploy to Pre-production Environment
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     needs: [deploy-to-staging, tests-on-staging]
     steps:
       - name: Stop existing service in Pre-production Environment
@@ -133,7 +133,7 @@ jobs:
 
   tests-on-preprod:
     name: Run Tests on Pre-production Environment
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     needs: deploy-to-preprod
     steps:
       - name: Run tests on pre-production environment
@@ -144,7 +144,7 @@ jobs:
 
   deploy-to-prod:
     name: Deploy to Production Environment
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     needs: [deploy-to-preprod, tests-on-preprod]
     steps:
       - name: Stop existing service in Production Environment
@@ -162,7 +162,7 @@ jobs:
 
   tests-on-prod:
     name: Run Tests on Production Environment
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     needs: deploy-to-prod
     steps:
       - name: Run tests on production environment
