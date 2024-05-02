@@ -37,7 +37,6 @@ jobs:
       with:
         repository: mtararujs/python-greetings
         path: python-greetings
-        clean: false
         
     - name: Modify Flask App Port
       run: |
