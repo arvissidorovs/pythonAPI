@@ -41,11 +41,11 @@ jobs:
     - name: Stop existing service in Development Environment
       run: |
         echo "Stopping existing service in Development Environment.."
-        if pm2 info greetings-app-dev &> /dev/null; then
+        if (pm2 info greetings-app-dev) { 
           pm2 delete greetings-app-dev
-        else
-          echo "Service greetings-app-dev does not exist, continuing..."
-        fi
+        } else {
+          Write-Host "Service greetings-app-dev does not exist, continuing..."
+        }
 
     - name: Deploy to Development Environment
       run: |
