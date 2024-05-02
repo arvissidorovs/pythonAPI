@@ -128,11 +128,11 @@ jobs:
         cd course-js-api-framework
         npm install
 
-    #- name: Run tests on staging environment
-    #  run: |
-    #    echo "Running tests on staging environment.."
-    #    cmd /c "npm run greetings greetings_staging"
-    #  working-directory: course-js-api-framework
+    - name: Run tests on staging environment
+      run: |
+        echo "Running tests on staging environment.."
+        cmd /c "npm run greetings greetings_staging"
+      working-directory: course-js-api-framework
 
   deploy-to-preprod:
     name: Deploy to Pre-production Environment
