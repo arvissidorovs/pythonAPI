@@ -76,7 +76,7 @@ jobs:
     - name: Run tests on development environment
       run: |
         echo "Running tests on development environment.."
-        cmd c/ "npm run greetings greetings_dev"
+        cmd /c "npm run greetings greetings_dev"
       working-directory: course-js-api-framework
 
   deploy-to-staging:
@@ -101,7 +101,7 @@ jobs:
     - name: Deploy to Staging Environment
       run: |
         echo "Deploying to Staging Environment.."
-        cmd c/ "pm2 start app.py --name greetings-app-staging -- --port=7002"
+        cmd /c "pm2 start app.py --name greetings-app-staging -- --port=7002"
       working-directory: python-greetings
 
   tests-on-staging:
@@ -211,7 +211,7 @@ jobs:
     - name: Deploy to Production Environment
       run: |
         echo "Deploying to Production Environment.."
-        cmd c/ "pm2 start app.py --name greetings-app-prod -- --port 7004"
+        cmd /c "pm2 start app.py --name greetings-app-prod -- --port 7004"
       working-directory: python-greetings
 
   tests-on-prod:
@@ -241,5 +241,5 @@ jobs:
     - name: Run tests on production environment
       run: |
         echo "Running tests on production environment.."
-        cmd c/ "npm run greetings greetings_prod"
+        cmd /c "npm run greetings greetings_prod"
       working-directory: course-js-api-framework
