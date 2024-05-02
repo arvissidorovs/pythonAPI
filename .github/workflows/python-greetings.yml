@@ -29,12 +29,20 @@ jobs:
     runs-on: self-hosted
     needs: install-pip-deps
     steps:
+    - name: Checkout Delivery Pipeline Definition
+      uses: actions/checkout@v3.5.2
 
-      - name: Deploy to Development Environment
-        run: |
+    - name: Checkout Python Greetings Repository
+      uses: actions/checkout@v3.5.2
+      with:
+        repository: mtararujs/python-greetings
+        path: python-greetings
+
+    - name: Deploy to Development Environment
+      run: |
           echo "Deploying to Development Environment.."
           pm2 start app.py --name greetings-app-dev -- --port 7001
-        working-directory: python-greetings
+      working-directory: python-greetings
 
   tests-on-dev:
     name: Run Tests on Development Environment
