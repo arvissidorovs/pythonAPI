@@ -180,11 +180,6 @@ jobs:
     runs-on: self-hosted
     needs: deploy-to-preprod
     steps:
-    - name: Stop existing service in Pre-production Environment
-      run: |
-        echo "Stopping existing service in Pre-production Environment.."
-        cmd /c "pm2 delete greetings-app-preprod & set "errorlevel=0""
-        
     - name: Checkout Delivery Pipeline Definition
       uses: actions/checkout@v3.5.2
 
